@@ -19,7 +19,7 @@
 - En una revisión final tipo code review se encontró y corrigió: una vulnerabilidad en un paquete de pruebas, parches de seguridad pendientes, una contraseña en la configuración base, la falta de validación al arrancar, la falta de tiempo límite en el aviso al restaurante y un health check que no revisaba la base de datos. Cada corrección tiene su prueba.
 
 **Qué verifiqué yo** *(completar)*
-- [ ] Ejecuté `dotnet test` en mi máquina (deben pasar 91): resultado ___
+- [ ] Ejecuté `dotnet test` en mi máquina (deben pasar 92): resultado ___
 - [ ] Puedo explicar por qué dos avisos simultáneos no generan dos ganancias (`PedidoRepository.IntentarMarcarComoPagadoAsync`).
 - [ ] Puedo explicar qué es el Outbox y por qué el aviso al restaurante no se envía dentro de la transacción.
 - [ ] Revisé el script `001` y sé qué pasa si hay datos duplicados.

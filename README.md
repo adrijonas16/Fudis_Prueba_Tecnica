@@ -56,7 +56,9 @@ Se usa **Controller → Service → Repository**, todo en un solo proyecto:
 ```
 src/Fudis.Pagos.Api/
 ├── Controllers/
-│   └── PagosController.cs                Recibe el aviso HTTP, verifica la firma y valida el JSON. Nada de lógica.
+│   └── PagosController.cs                Recibe el aviso HTTP y valida el JSON. Nada de lógica.
+├── Filters/
+│   └── ValidarFirmaPasarelaAttribute.cs  [ValidarFirmaPasarela]: verifica la firma antes del controlador (401 si falla).
 ├── Services/
 │   ├── ConfirmacionPagoService.cs        ★ LÓGICA PRINCIPAL: los 5 pasos del pago en una transacción.
 │   ├── EnvioNotificacionesService.cs     Envía los avisos pendientes al restaurante, con reintentos.
@@ -78,7 +80,7 @@ src/Fudis.Pagos.Api/
 ├── Database/                             FudisDbContext (une clases en español con columnas en inglés), migrador.
 └── Configuration/                        Options, registro de dependencias (DependencyInjection.cs).
 db/                                       SQL: migrations/, queries/, demo/. Ver db/README.md.
-tests/Fudis.Pagos.UnitTests/              55 pruebas sin base de datos.
+tests/Fudis.Pagos.UnitTests/              56 pruebas sin base de datos.
 tests/Fudis.Pagos.IntegrationTests/       36 pruebas contra SQL Server real.
 ```
 
@@ -110,8 +112,8 @@ tests/Fudis.Pagos.IntegrationTests/       36 pruebas contra SQL Server real.
 ## 4. Cómo funciona la solución
 
 ```
-Pasarela ──POST firmado──▶ PagosController
-                             1. ¿Firma válida?  No → 401
+Pasarela ──POST firmado──▶ [ValidarFirmaPasarela] 1. ¿Firma válida?  No → 401
+                           PagosController
                              2. ¿JSON completo? No → 400
                              3. ConfirmacionPagoService ──── UNA transacción ─────────────────┐
                                   PASO 1  Registrar el aviso      (índice único: Pasarela+EventoId)  │
@@ -204,7 +206,7 @@ En producción se ejecuta con `sqlcmd -b -i db/migrations/001_...sql`, en un hor
 
 ---
 
-## 9. Pruebas: **91 de 91 en verde**
+## 9. Pruebas: **92 de 92 en verde**
 
 Se ejecutaron tres veces seguidas. La evidencia está en `docs/test-results/`.
 
@@ -213,6 +215,7 @@ Se ejecutaron tres veces seguidas. La evidencia está en `docs/test-results/`.
 | `CalculoGananciaServiceTests` | 10 | El 70 % y el redondeo. |
 | `VerificacionFirmaServiceTests` | 13 | Firma válida, JSON alterado, secreto incorrecto, firma vieja, cambio de secreto. |
 | `SolicitudConfirmarPagoTests` | 11 | Validación del JSON de entrada. |
+| `ValidarFirmaPasarelaAttributeTests` | 1 | El filtro de firma corre después del límite de tamaño. |
 | `ReglasNegocioTests` | 21 | Estados, casos para revisión, espera entre reintentos, configuración inválida. |
 | `ConfirmacionPagoServiceTests` | 16 | Pago normal, repetidos, **25 avisos simultáneos**, cobro doble, monto incorrecto, cancelado, sin repartidor... |
 | `EnvioNotificacionesServiceTests` | 6 | Reintentos, descarte, trabajador caído, restaurante que no responde (tiempo límite), **4 trabajadores en paralelo**. |
@@ -232,6 +235,7 @@ Se ejecutaron tres veces seguidas. La evidencia está en `docs/test-results/`.
 | Paquetes sin los últimos parches de seguridad | EF Core y Mvc.Testing 8.0.11 → 8.0.33 (misma versión mayor, .NET 8 LTS). |
 | Contraseña de `sa` en `appsettings.json` (archivo base que se sube al repositorio) | Movida a `appsettings.Development.json`. En producción viene de una variable de entorno. |
 | Sin secretos de firma, la API arrancaba y fallaba con el primer pago | Validación al arrancar: si falta configuración, no inicia. |
+| La verificación de la firma estaba mezclada en el controlador | Movida al filtro `[ValidarFirmaPasarela]`; el controlador solo traduce HTTP. |
 | El aviso al restaurante no tenía tiempo límite: si se colgaba, el bloqueo vencía y otro trabajador lo reenviaba | Tiempo máximo por envío (30 s) y validación de que sea menor que el bloqueo. |
 | `/health` decía "Healthy" con la base caída | Revisa SQL Server; responde 503 en máximo 3 s. |
 | Formato y advertencias | `dotnet format`: 0 cambios. Compilación con `TreatWarningsAsErrors`: 0 advertencias. |
@@ -258,7 +262,6 @@ Se ejecutaron tres veces seguidas. La evidencia está en `docs/test-results/`.
 - **Ganancia cuando no hay repartidor:** falta el proceso de asignación.
 - **Revisión y reembolsos** de `PAGO_EN_CONFLICTO` y `PEDIDO_NO_PAGABLE`: hoy quedan marcados y en el log; faltan las alertas y el proceso de reembolso.
 - **Notificador real:** `NotificadorRestaurantePorLog` es de ejemplo. Hay que reemplazarlo por el cliente HTTP o cola, enviando `MensajeId` como `Idempotency-Key`.
-- **Mover la verificación de firma a un filtro** (`[ValidarFirmaPasarela]`), para que el controlador quede aún más simple.
 - **Limpieza** de mensajes enviados antiguos y de `RawPayload` (job de retención).
 - **Métricas y alertas:** avisos por resultado, mensajes pendientes, descartados.
 - Índice único en `Orders.PaymentId` (un pago no puede pagar dos pedidos), pendiente de confirmar con la pasarela.

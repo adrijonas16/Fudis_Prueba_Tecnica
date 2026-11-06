@@ -11,7 +11,7 @@ API en .NET 8 que recibe el aviso de la pasarela de pagos (webhook) cuando un cl
 ```bash
 docker compose up -d                                   # SQL Server en localhost,14333
 dotnet build                                           # TreatWarningsAsErrors: 0 advertencias
-dotnet test                                            # 91 pruebas; requiere Docker (Testcontainers)
+dotnet test                                            # 92 pruebas; requiere Docker (Testcontainers)
 dotnet run --project src/Fudis.Pagos.Api               # http://localhost:5080 (Development aplica migraciones)
 ./scripts/send-notification.ps1 -OrderId 1             # simula la pasarela (firma HMAC)
 dotnet format --verify-no-changes                      # formato
@@ -24,7 +24,8 @@ Si ya hay un SQL Server, las pruebas pueden usarlo: `FUDIS_TEST_SQLSERVER="Serve
 
 ```
 src/Fudis.Pagos.Api/
-  Controllers/    Solo HTTP: leer cuerpo crudo, verificar firma, validar, llamar al servicio, responder.
+  Controllers/    Solo HTTP: validar el JSON, llamar al servicio, responder.
+  Filters/        [ValidarFirmaPasarela]: lee el cuerpo crudo y verifica la firma antes del controlador.
   Services/       Lógica de negocio. ConfirmacionPagoService es el núcleo.
   Repositories/   Un repositorio por tabla. UnitOfWork los expone y maneja la transacción.
   Models/         Entities (tablas) y Contracts (entrada/salida del endpoint).
@@ -36,7 +37,7 @@ db/               migrations/ (000 = esquema original supuesto, 001 = cambios), 
 tests/            UnitTests (sin BD) e IntegrationTests (SQL Server real).
 ```
 
-Flujo de lectura recomendado: `PagosController` → `ConfirmacionPagoService` → `UnitOfWork` → `PedidoRepository`.
+Flujo de lectura recomendado: `ValidarFirmaPasarelaAttribute` → `PagosController` → `ConfirmacionPagoService` → `UnitOfWork` → `PedidoRepository`.
 
 ## Convenciones
 
@@ -55,7 +56,7 @@ Flujo de lectura recomendado: `PagosController` → `ConfirmacionPagoService` �
 3. **Una ganancia por pedido.** Índice único `UX_DriverEarnings_OrderId`. No quitarlo.
 4. **Pago, ganancia y mensaje pendiente van en la misma transacción.** Todo lo que escriba en el flujo de pago pasa por el mismo `UnitOfWork`.
 5. **Nunca llamar a servicios externos (HTTP, colas) dentro de la transacción.** Se guarda un `MensajePendiente` (Outbox) y lo envía el worker.
-6. **La firma se verifica sobre el cuerpo crudo**, antes de deserializar. No usar `[FromBody]` en el webhook.
+6. **La firma se verifica sobre el cuerpo crudo**, antes de deserializar, con el filtro `[ValidarFirmaPasarela]`. No usar `[FromBody]` en el webhook. Todo endpoint que reciba avisos de la pasarela lleva el atributo; el filtro corre después de `[RequestSizeLimit]` (Order 1000).
 7. **Casos raros = 200 + `RequiereRevision`**, no 4xx/5xx: la pasarela no debe reintentar algo que reintentar no arregla. Solo los errores transitorios devuelven 5xx.
 8. **El tiempo máximo por envío debe ser menor que el tiempo de bloqueo** del mensaje (`EnvioNotificacionesOptions.Validar`).
 

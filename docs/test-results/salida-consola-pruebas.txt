@@ -1,4 +1,4 @@
-Test run for /home/claude/fudis-pagos/tests/Fudis.Pagos.UnitTests/bin/Debug/net8.0/Fudis.Pagos.UnitTests.dll (.NETCoreApp,Version=v8.0)
+Test run for /home/claude/fudis_prueba_tecnica/tests/Fudis.Pagos.UnitTests/bin/Debug/net8.0/Fudis.Pagos.UnitTests.dll (.NETCoreApp,Version=v8.0)
 Microsoft (R) Test Execution Command Line Tool Version 17.8.0 (x64)
 Copyright (c) Microsoft Corporation.  All rights reserved.
 
@@ -6,28 +6,39 @@ Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
 [xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.33)
 [xUnit.net 00:00:00.05]   Discovering: Fudis.Pagos.UnitTests
-[xUnit.net 00:00:00.10]   Discovered:  Fudis.Pagos.UnitTests
+[xUnit.net 00:00:00.09]   Discovered:  Fudis.Pagos.UnitTests
 [xUnit.net 00:00:00.10]   Starting:    Fudis.Pagos.UnitTests
-  Passed Fudis.Pagos.UnitTests.CalculoGananciaServiceTests.Usa_el_porcentaje_configurado [6 ms]
+  Passed Fudis.Pagos.UnitTests.ValidarFirmaPasarelaAttributeTests.Corre_despues_del_limite_de_tamano_para_no_leer_cuerpos_gigantes [3 ms]
+  Passed Fudis.Pagos.UnitTests.CalculoGananciaServiceTests.Usa_el_porcentaje_configurado [5 ms]
   Passed Fudis.Pagos.UnitTests.CalculoGananciaServiceTests.Rechaza_porcentajes_invalidos(porcentaje: 100.01000000000001) [< 1 ms]
   Passed Fudis.Pagos.UnitTests.CalculoGananciaServiceTests.Rechaza_porcentajes_invalidos(porcentaje: -1) [< 1 ms]
-  Passed Fudis.Pagos.UnitTests.CalculoGananciaServiceTests.Calcula_el_70_por_ciento_redondeado_a_centavos(tarifaEnvio: "0.05", gananciaEsperada: "0.04") [4 ms]
+  Passed Fudis.Pagos.UnitTests.CalculoGananciaServiceTests.Calcula_el_70_por_ciento_redondeado_a_centavos(tarifaEnvio: "0.05", gananciaEsperada: "0.04") [2 ms]
   Passed Fudis.Pagos.UnitTests.CalculoGananciaServiceTests.Calcula_el_70_por_ciento_redondeado_a_centavos(tarifaEnvio: "5000", gananciaEsperada: "3500") [< 1 ms]
   Passed Fudis.Pagos.UnitTests.CalculoGananciaServiceTests.Calcula_el_70_por_ciento_redondeado_a_centavos(tarifaEnvio: "10.01", gananciaEsperada: "7.01") [< 1 ms]
   Passed Fudis.Pagos.UnitTests.CalculoGananciaServiceTests.Calcula_el_70_por_ciento_redondeado_a_centavos(tarifaEnvio: "0", gananciaEsperada: "0") [< 1 ms]
   Passed Fudis.Pagos.UnitTests.CalculoGananciaServiceTests.Calcula_el_70_por_ciento_redondeado_a_centavos(tarifaEnvio: "3333.33", gananciaEsperada: "2333.33") [< 1 ms]
   Passed Fudis.Pagos.UnitTests.CalculoGananciaServiceTests.Calcula_el_70_por_ciento_redondeado_a_centavos(tarifaEnvio: "0.15", gananciaEsperada: "0.11") [< 1 ms]
   Passed Fudis.Pagos.UnitTests.CalculoGananciaServiceTests.Rechaza_tarifas_negativas [< 1 ms]
-  Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.Una_configuracion_de_envio_invalida_impide_arrancar(lote: 20, intentos: 10, segundosEnvio: 90, segundosBloqueo: 60) [3 ms]
-  Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.Una_configuracion_de_envio_invalida_impide_arrancar(lote: 20, intentos: 10, segundosEnvio: 60, segundosBloqueo: 60) [< 1 ms]
+  Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.Una_configuracion_de_envio_invalida_impide_arrancar(lote: 20, intentos: 10, segundosEnvio: 90, segundosBloqueo: 60) [< 1 ms]
+  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Rechaza_cabecera_ausente_o_mal_escrita(cabecera: "t=abc,v1=00", esperado: MalFormada) [3 ms]
+  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Rechaza_cabecera_ausente_o_mal_escrita(cabecera: null, esperado: Ausente) [< 1 ms]
+  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Rechaza_cabecera_ausente_o_mal_escrita(cabecera: "", esperado: Ausente) [< 1 ms]
+  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Rechaza_cabecera_ausente_o_mal_escrita(cabecera: "t=1793908800,v1=zz", esperado: MalFormada) [< 1 ms]
+  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Rechaza_cabecera_ausente_o_mal_escrita(cabecera: "basura", esperado: MalFormada) [< 1 ms]
+  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Rechaza_cabecera_ausente_o_mal_escrita(cabecera: "t=1793908800", esperado: MalFormada) [< 1 ms]
+  Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.Una_configuracion_de_envio_invalida_impide_arrancar(lote: 20, intentos: 10, segundosEnvio: 60, segundosBloqueo: 60) [3 ms]
   Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.Una_configuracion_de_envio_invalida_impide_arrancar(lote: 20, intentos: 0, segundosEnvio: 30, segundosBloqueo: 60) [< 1 ms]
   Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.Una_configuracion_de_envio_invalida_impide_arrancar(lote: 0, intentos: 10, segundosEnvio: 30, segundosBloqueo: 60) [< 1 ms]
+  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Rechaza_una_firma_hecha_con_otro_secreto [2 ms]
+  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Rechaza_una_firma_del_futuro [< 1 ms]
+  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.No_arranca_sin_secretos_configurados [< 1 ms]
+  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Rechaza_si_alguien_modifico_el_json [< 1 ms]
   Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.Solo_un_pedido_pendiente_se_puede_pagar(estado: PendienteDePago, sePuedePagar: True) [3 ms]
-  Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.Solo_un_pedido_pendiente_se_puede_pagar(estado: Pagado, sePuedePagar: False) [1 ms]
+  Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.Solo_un_pedido_pendiente_se_puede_pagar(estado: Pagado, sePuedePagar: False) [< 1 ms]
   Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.Solo_un_pedido_pendiente_se_puede_pagar(estado: Reembolsado, sePuedePagar: False) [< 1 ms]
   Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.Solo_un_pedido_pendiente_se_puede_pagar(estado: Cancelado, sePuedePagar: False) [< 1 ms]
   Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.Solo_un_pedido_pendiente_se_puede_pagar(estado: Entregado, sePuedePagar: False) [< 1 ms]
-  Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.Los_problemas_de_dinero_requieren_revision(tipo: PedidoNoPagable, requiereRevision: True) [2 ms]
+  Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.Los_problemas_de_dinero_requieren_revision(tipo: PedidoNoPagable, requiereRevision: True) [< 1 ms]
   Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.Los_problemas_de_dinero_requieren_revision(tipo: Ignorado, requiereRevision: False) [< 1 ms]
   Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.Los_problemas_de_dinero_requieren_revision(tipo: Duplicado, requiereRevision: False) [< 1 ms]
   Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.Los_problemas_de_dinero_requieren_revision(tipo: Procesado, requiereRevision: False) [< 1 ms]
@@ -35,77 +46,68 @@ A total of 1 test files matched the specified pattern.
   Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.Los_problemas_de_dinero_requieren_revision(tipo: MontoNoCoincide, requiereRevision: True) [< 1 ms]
   Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.Los_problemas_de_dinero_requieren_revision(tipo: PedidoNoExiste, requiereRevision: True) [< 1 ms]
   Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.Los_problemas_de_dinero_requieren_revision(tipo: YaPagado, requiereRevision: False) [< 1 ms]
-  Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.La_espera_entre_reintentos_se_duplica_y_tiene_tope [2 ms]
+  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Acepta_cualquiera_de_los_secretos_mientras_se_cambia_el_secreto [2 ms]
+  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Acepta_una_firma_correcta [< 1 ms]
+  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Rechaza_una_firma_vieja_para_evitar_reenvios [< 1 ms]
+  Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.La_espera_entre_reintentos_se_duplica_y_tiene_tope [8 ms]
   Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.La_configuracion_por_defecto_del_envio_es_valida [< 1 ms]
-  Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.Un_estado_desconocido_falla_en_vez_de_adivinar [6 ms]
-  Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.El_estado_pagado_se_guarda_como_PAID_igual_que_el_sistema_actual [6 ms]
-  Passed Fudis.Pagos.UnitTests.SolicitudConfirmarPagoTests.Detecta_el_campo_con_error(original: "\"amount\":45000.50", reemplazo: "\"amount\":0", campoConError: "amount") [49 ms]
+  Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.Un_estado_desconocido_falla_en_vez_de_adivinar [1 ms]
+  Passed Fudis.Pagos.UnitTests.ReglasNegocioTests.El_estado_pagado_se_guarda_como_PAID_igual_que_el_sistema_actual [3 ms]
+  Passed Fudis.Pagos.UnitTests.SolicitudConfirmarPagoTests.Detecta_el_campo_con_error(original: "\"amount\":45000.50", reemplazo: "\"amount\":0", campoConError: "amount") [43 ms]
   Passed Fudis.Pagos.UnitTests.SolicitudConfirmarPagoTests.Detecta_el_campo_con_error(original: "\"amount\":45000.50", reemplazo: "\"amount\":-5", campoConError: "amount") [< 1 ms]
   Passed Fudis.Pagos.UnitTests.SolicitudConfirmarPagoTests.Detecta_el_campo_con_error(original: "\"eventId\":\"evt_1\"", reemplazo: "\"eventId\":\"   \"", campoConError: "eventId") [< 1 ms]
   Passed Fudis.Pagos.UnitTests.SolicitudConfirmarPagoTests.Detecta_el_campo_con_error(original: "\"currency\":\"COP\"", reemplazo: "\"currency\":\"cop\"", campoConError: "currency") [< 1 ms]
   Passed Fudis.Pagos.UnitTests.SolicitudConfirmarPagoTests.Detecta_el_campo_con_error(original: "\"currency\":\"COP\"", reemplazo: "\"currency\":\"PESOS\"", campoConError: "currency") [< 1 ms]
   Passed Fudis.Pagos.UnitTests.SolicitudConfirmarPagoTests.Detecta_el_campo_con_error(original: "\"orderId\":10", reemplazo: "\"orderId\":0", campoConError: "orderId") [< 1 ms]
+[xUnit.net 00:00:00.20]   Finished:    Fudis.Pagos.UnitTests
   Passed Fudis.Pagos.UnitTests.SolicitudConfirmarPagoTests.Detecta_el_campo_con_error(original: "\"amount\":45000.50", reemplazo: "\"amount\":1.001", campoConError: "amount") [< 1 ms]
   Passed Fudis.Pagos.UnitTests.SolicitudConfirmarPagoTests.Un_json_mal_escrito_devuelve_null [1 ms]
   Passed Fudis.Pagos.UnitTests.SolicitudConfirmarPagoTests.Un_pago_fallido_es_valido_pero_no_es_exitoso [1 ms]
-  Passed Fudis.Pagos.UnitTests.SolicitudConfirmarPagoTests.Solo_con_orderId_como_el_codigo_original_falta_todo_lo_demas [2 ms]
+  Passed Fudis.Pagos.UnitTests.SolicitudConfirmarPagoTests.Solo_con_orderId_como_el_codigo_original_falta_todo_lo_demas [< 1 ms]
   Passed Fudis.Pagos.UnitTests.SolicitudConfirmarPagoTests.Un_json_correcto_no_tiene_errores_y_la_fecha_queda_en_utc [< 1 ms]
-  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Rechaza_cabecera_ausente_o_mal_escrita(cabecera: "t=abc,v1=00", esperado: MalFormada) [8 ms]
-  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Rechaza_cabecera_ausente_o_mal_escrita(cabecera: null, esperado: Ausente) [< 1 ms]
-  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Rechaza_cabecera_ausente_o_mal_escrita(cabecera: "", esperado: Ausente) [< 1 ms]
-  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Rechaza_cabecera_ausente_o_mal_escrita(cabecera: "t=1793908800,v1=zz", esperado: MalFormada) [< 1 ms]
-  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Rechaza_cabecera_ausente_o_mal_escrita(cabecera: "basura", esperado: MalFormada) [< 1 ms]
-  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Rechaza_cabecera_ausente_o_mal_escrita(cabecera: "t=1793908800", esperado: MalFormada) [< 1 ms]
-  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Rechaza_una_firma_hecha_con_otro_secreto [3 ms]
-  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Rechaza_una_firma_del_futuro [< 1 ms]
-  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.No_arranca_sin_secretos_configurados [< 1 ms]
-  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Rechaza_si_alguien_modifico_el_json [< 1 ms]
-[xUnit.net 00:00:00.22]   Finished:    Fudis.Pagos.UnitTests
-  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Acepta_cualquiera_de_los_secretos_mientras_se_cambia_el_secreto [< 1 ms]
-  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Acepta_una_firma_correcta [< 1 ms]
-  Passed Fudis.Pagos.UnitTests.VerificacionFirmaServiceTests.Rechaza_una_firma_vieja_para_evitar_reenvios [< 1 ms]
-Results File: /home/claude/fudis-pagos/docs/test-results/UnitTests.trx
+Results File: /home/claude/fudis_prueba_tecnica/docs/test-results/UnitTests.trx
 
 Test Run Successful.
-Total tests: 55
-     Passed: 55
- Total time: 0.5941 Seconds
-Test run for /home/claude/fudis-pagos/tests/Fudis.Pagos.IntegrationTests/bin/Debug/net8.0/Fudis.Pagos.IntegrationTests.dll (.NETCoreApp,Version=v8.0)
+Total tests: 56
+     Passed: 56
+ Total time: 0.5553 Seconds
+Test run for /home/claude/fudis_prueba_tecnica/tests/Fudis.Pagos.IntegrationTests/bin/Debug/net8.0/Fudis.Pagos.IntegrationTests.dll (.NETCoreApp,Version=v8.0)
 Microsoft (R) Test Execution Command Line Tool Version 17.8.0 (x64)
 Copyright (c) Microsoft Corporation.  All rights reserved.
 
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
 [xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.33)
-[xUnit.net 00:00:00.07]   Discovering: Fudis.Pagos.IntegrationTests
+[xUnit.net 00:00:00.06]   Discovering: Fudis.Pagos.IntegrationTests
 [xUnit.net 00:00:00.11]   Discovered:  Fudis.Pagos.IntegrationTests
-[xUnit.net 00:00:00.12]   Starting:    Fudis.Pagos.IntegrationTests
+[xUnit.net 00:00:00.11]   Starting:    Fudis.Pagos.IntegrationTests
   Passed Fudis.Pagos.IntegrationTests.CodigoOriginalTests.Codigo_original_si_falla_el_aviso_al_restaurante_nunca_se_reintenta [1 s]
-  Passed Fudis.Pagos.IntegrationTests.CodigoOriginalTests.Codigo_original_dos_avisos_simultaneos_le_pagan_dos_veces_al_repartidor [222 ms]
-  Passed Fudis.Pagos.IntegrationTests.CodigoOriginalTests.Codigo_original_marca_pagado_un_pedido_cancelado_solo_con_el_id [150 ms]
-  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.El_mismo_aviso_dos_veces_se_procesa_una_sola_vez [637 ms]
-  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Un_pago_valido_marca_pagado_registra_ganancia_y_deja_aviso_pendiente [242 ms]
-  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.El_mismo_aviso_25_veces_al_mismo_tiempo_genera_una_sola_ganancia [517 ms]
-  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Si_el_monto_o_la_moneda_no_coinciden_no_se_marca_pagado(monto: 44999.99, moneda: "COP") [277 ms]
-  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Si_el_monto_o_la_moneda_no_coinciden_no_se_marca_pagado(monto: 1, moneda: "COP") [234 ms]
+  Passed Fudis.Pagos.IntegrationTests.CodigoOriginalTests.Codigo_original_dos_avisos_simultaneos_le_pagan_dos_veces_al_repartidor [162 ms]
+  Passed Fudis.Pagos.IntegrationTests.CodigoOriginalTests.Codigo_original_marca_pagado_un_pedido_cancelado_solo_con_el_id [158 ms]
+  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.El_mismo_aviso_dos_veces_se_procesa_una_sola_vez [571 ms]
+  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Un_pago_valido_marca_pagado_registra_ganancia_y_deja_aviso_pendiente [263 ms]
+  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.El_mismo_aviso_25_veces_al_mismo_tiempo_genera_una_sola_ganancia [483 ms]
+  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Si_el_monto_o_la_moneda_no_coinciden_no_se_marca_pagado(monto: 44999.99, moneda: "COP") [235 ms]
+  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Si_el_monto_o_la_moneda_no_coinciden_no_se_marca_pagado(monto: 1, moneda: "COP") [225 ms]
   Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Si_el_monto_o_la_moneda_no_coinciden_no_se_marca_pagado(monto: 45000, moneda: "USD") [229 ms]
-  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Un_pedido_sin_repartidor_se_paga_y_se_avisa_pero_la_ganancia_queda_para_despues [231 ms]
-  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Un_aviso_de_fallo_que_llega_tarde_no_deshace_el_pago [243 ms]
-  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Un_pedido_que_no_existe_queda_registrado_para_revision [240 ms]
-  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Un_pedido_antiguo_sin_monto_total_no_se_acepta_automaticamente [227 ms]
-  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Un_segundo_pago_distinto_para_un_pedido_pagado_se_marca_como_posible_cobro_doble [226 ms]
-  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.La_base_de_datos_rechaza_una_segunda_ganancia_aunque_el_codigo_tuviera_un_error [217 ms]
-  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Avisos_distintos_del_mismo_pago_al_mismo_tiempo_generan_una_sola_ganancia [459 ms]
-  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Un_aviso_de_pago_fallido_se_registra_y_se_ignora [235 ms]
-  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Un_pedido_cancelado_o_reembolsado_no_vuelve_a_quedar_pagado(estadoInicial: Reembolsado) [290 ms]
-  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Un_pedido_cancelado_o_reembolsado_no_vuelve_a_quedar_pagado(estadoInicial: Cancelado) [214 ms]
-  Passed Fudis.Pagos.IntegrationTests.DatabaseMigratorTests.Un_reintento_para_un_pedido_pagado_por_el_codigo_viejo_se_marca_para_revision [214 ms]
-  Passed Fudis.Pagos.IntegrationTests.DatabaseMigratorTests.La_migracion_conserva_los_datos_y_se_puede_ejecutar_dos_veces [250 ms]
-  Passed Fudis.Pagos.IntegrationTests.DatabaseMigratorTests.La_migracion_se_detiene_sin_cambiar_nada_si_hay_ganancias_duplicadas [183 ms]
-  Passed Fudis.Pagos.IntegrationTests.EnvioNotificacionesServiceTests.Un_mensaje_apartado_por_un_trabajador_que_se_cayo_se_retoma_al_vencer_el_bloqueo [292 ms]
-  Passed Fudis.Pagos.IntegrationTests.EnvioNotificacionesServiceTests.Avisa_al_restaurante_una_vez_con_el_id_del_mensaje [245 ms]
-  Passed Fudis.Pagos.IntegrationTests.EnvioNotificacionesServiceTests.Si_falla_reintenta_esperando_cada_vez_mas_hasta_lograrlo [239 ms]
-  Passed Fudis.Pagos.IntegrationTests.EnvioNotificacionesServiceTests.Si_el_restaurante_no_responde_se_corta_por_tiempo_y_cuenta_como_fallo [532 ms]
+  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Un_pedido_sin_repartidor_se_paga_y_se_avisa_pero_la_ganancia_queda_para_despues [236 ms]
+  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Un_aviso_de_fallo_que_llega_tarde_no_deshace_el_pago [254 ms]
+  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Un_pedido_que_no_existe_queda_registrado_para_revision [217 ms]
+  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Un_pedido_antiguo_sin_monto_total_no_se_acepta_automaticamente [213 ms]
+  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Un_segundo_pago_distinto_para_un_pedido_pagado_se_marca_como_posible_cobro_doble [259 ms]
+  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.La_base_de_datos_rechaza_una_segunda_ganancia_aunque_el_codigo_tuviera_un_error [225 ms]
+  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Avisos_distintos_del_mismo_pago_al_mismo_tiempo_generan_una_sola_ganancia [454 ms]
+  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Un_aviso_de_pago_fallido_se_registra_y_se_ignora [209 ms]
+  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Un_pedido_cancelado_o_reembolsado_no_vuelve_a_quedar_pagado(estadoInicial: Reembolsado) [213 ms]
+  Passed Fudis.Pagos.IntegrationTests.ConfirmacionPagoServiceTests.Un_pedido_cancelado_o_reembolsado_no_vuelve_a_quedar_pagado(estadoInicial: Cancelado) [205 ms]
+  Passed Fudis.Pagos.IntegrationTests.DatabaseMigratorTests.Un_reintento_para_un_pedido_pagado_por_el_codigo_viejo_se_marca_para_revision [229 ms]
+  Passed Fudis.Pagos.IntegrationTests.DatabaseMigratorTests.La_migracion_conserva_los_datos_y_se_puede_ejecutar_dos_veces [228 ms]
+  Passed Fudis.Pagos.IntegrationTests.DatabaseMigratorTests.La_migracion_se_detiene_sin_cambiar_nada_si_hay_ganancias_duplicadas [181 ms]
+  Passed Fudis.Pagos.IntegrationTests.EnvioNotificacionesServiceTests.Un_mensaje_apartado_por_un_trabajador_que_se_cayo_se_retoma_al_vencer_el_bloqueo [313 ms]
+  Passed Fudis.Pagos.IntegrationTests.EnvioNotificacionesServiceTests.Avisa_al_restaurante_una_vez_con_el_id_del_mensaje [231 ms]
+  Passed Fudis.Pagos.IntegrationTests.EnvioNotificacionesServiceTests.Si_falla_reintenta_esperando_cada_vez_mas_hasta_lograrlo [258 ms]
+  Passed Fudis.Pagos.IntegrationTests.EnvioNotificacionesServiceTests.Si_el_restaurante_no_responde_se_corta_por_tiempo_y_cuenta_como_fallo [541 ms]
+  Passed Fudis.Pagos.IntegrationTests.EnvioNotificacionesServiceTests.Cuatro_trabajadores_a_la_vez_envian_cada_mensaje_una_sola_vez [2 s]
 info: Fudis.Pagos.Api.Workers.EnvioNotificacionesWorker[0]
       El envío de notificaciones está desactivado por configuración.
 warn: Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware[9]
@@ -120,15 +122,14 @@ warn: Microsoft.AspNetCore.Mvc.Filters.RequestSizeLimitFilter[1]
       A request body size limit could not be applied. This server does not support the IHttpRequestBodySizeFeature.
 info: Fudis.Pagos.Api.Workers.EnvioNotificacionesWorker[0]
       El envío de notificaciones está desactivado por configuración.
-  Passed Fudis.Pagos.IntegrationTests.EnvioNotificacionesServiceTests.Cuatro_trabajadores_a_la_vez_envian_cada_mensaje_una_sola_vez [965 ms]
-  Passed Fudis.Pagos.IntegrationTests.EnvioNotificacionesServiceTests.Si_siempre_falla_se_descarta_y_deja_de_intentar [259 ms]
-  Passed Fudis.Pagos.IntegrationTests.PagosControllerTests.Firmado_pero_con_datos_invalidos_responde_400(json: "{esto no es json") [402 ms]
-  Passed Fudis.Pagos.IntegrationTests.PagosControllerTests.Firmado_pero_con_datos_invalidos_responde_400(json: "{\"orderId\":1}") [249 ms]
 info: Fudis.Pagos.Api.Workers.EnvioNotificacionesWorker[0]
       El envío de notificaciones está desactivado por configuración.
-  Passed Fudis.Pagos.IntegrationTests.PagosControllerTests.Health_responde_sano_cuando_hay_base_de_datos [245 ms]
+  Passed Fudis.Pagos.IntegrationTests.EnvioNotificacionesServiceTests.Si_siempre_falla_se_descarta_y_deja_de_intentar [291 ms]
+  Passed Fudis.Pagos.IntegrationTests.PagosControllerTests.Firmado_pero_con_datos_invalidos_responde_400(json: "{esto no es json") [381 ms]
+  Passed Fudis.Pagos.IntegrationTests.PagosControllerTests.Firmado_pero_con_datos_invalidos_responde_400(json: "{\"orderId\":1}") [223 ms]
+  Passed Fudis.Pagos.IntegrationTests.PagosControllerTests.Health_responde_sano_cuando_hay_base_de_datos [231 ms]
 fail: Microsoft.Extensions.Diagnostics.HealthChecks.DefaultHealthCheckService[103]
-      Health check base-de-datos with status Unhealthy completed after 1517.5363ms with message 'No se puede conectar a SQL Server.'
+      Health check base-de-datos with status Unhealthy completed after 1518.2562ms with message 'No se puede conectar a SQL Server.'
 info: Fudis.Pagos.Api.Workers.EnvioNotificacionesWorker[0]
       El envío de notificaciones está desactivado por configuración.
 warn: Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware[9]
@@ -144,11 +145,27 @@ warn: Microsoft.AspNetCore.Mvc.Filters.RequestSizeLimitFilter[1]
 info: Fudis.Pagos.Api.Services.ConfirmacionPagoService[0]
       Aviso de pago evt_http_1 (pedido 1): DUPLICADO. Este aviso ya había llegado (resultado original: PROCESADO).
 info: Fudis.Pagos.Api.Notifications.NotificadorRestaurantePorLog[0]
-      Restaurante notificado: pedido 1 pagado (pago pay_http, id del aviso 70bc2f4a-b9f2-4aac-8d9d-020816ab57b2).
+      Restaurante notificado: pedido 1 pagado (pago pay_http, id del aviso 83e10873-646f-4606-acd9-6d940964dce6).
+  Passed Fudis.Pagos.IntegrationTests.PagosControllerTests.Health_responde_503_cuando_no_hay_base_de_datos [1 s]
+  Passed Fudis.Pagos.IntegrationTests.PagosControllerTests.Un_aviso_firmado_se_procesa_completo_incluido_el_aviso_al_restaurante [372 ms]
 info: Fudis.Pagos.Api.Workers.EnvioNotificacionesWorker[0]
       El envío de notificaciones está desactivado por configuración.
 warn: Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware[9]
       A request body size limit could not be applied. This server does not support the IHttpMaxRequestBodySizeFeature.
+warn: Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware[9]
+      A request body size limit could not be applied. This server does not support the IHttpMaxRequestBodySizeFeature.
+warn: Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware[9]
+      A request body size limit could not be applied. This server does not support the IHttpMaxRequestBodySizeFeature.
+warn: Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware[9]
+      A request body size limit could not be applied. This server does not support the IHttpMaxRequestBodySizeFeature.
+warn: Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware[9]
+      A request body size limit could not be applied. This server does not support the IHttpMaxRequestBodySizeFeature.
+warn: Microsoft.AspNetCore.Mvc.Filters.RequestSizeLimitFilter[1]
+      A request body size limit could not be applied. This server does not support the IHttpRequestBodySizeFeature.
+warn: Microsoft.AspNetCore.Mvc.Filters.RequestSizeLimitFilter[1]
+      A request body size limit could not be applied. This server does not support the IHttpRequestBodySizeFeature.
+warn: Microsoft.AspNetCore.Mvc.Filters.RequestSizeLimitFilter[1]
+      A request body size limit could not be applied. This server does not support the IHttpRequestBodySizeFeature.
 warn: Microsoft.AspNetCore.Mvc.Filters.RequestSizeLimitFilter[1]
       A request body size limit could not be applied. This server does not support the IHttpRequestBodySizeFeature.
 warn: Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware[9]
@@ -163,20 +180,6 @@ warn: Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware[9]
       A request body size limit could not be applied. This server does not support the IHttpMaxRequestBodySizeFeature.
 warn: Microsoft.AspNetCore.Mvc.Filters.RequestSizeLimitFilter[1]
       A request body size limit could not be applied. This server does not support the IHttpRequestBodySizeFeature.
-warn: Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware[9]
-      A request body size limit could not be applied. This server does not support the IHttpMaxRequestBodySizeFeature.
-warn: Microsoft.AspNetCore.Mvc.Filters.RequestSizeLimitFilter[1]
-      A request body size limit could not be applied. This server does not support the IHttpRequestBodySizeFeature.
-warn: Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware[9]
-      A request body size limit could not be applied. This server does not support the IHttpMaxRequestBodySizeFeature.
-warn: Microsoft.AspNetCore.Mvc.Filters.RequestSizeLimitFilter[1]
-      A request body size limit could not be applied. This server does not support the IHttpRequestBodySizeFeature.
-warn: Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware[9]
-      A request body size limit could not be applied. This server does not support the IHttpMaxRequestBodySizeFeature.
-warn: Microsoft.AspNetCore.Mvc.Filters.RequestSizeLimitFilter[1]
-      A request body size limit could not be applied. This server does not support the IHttpRequestBodySizeFeature.
-warn: Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware[9]
-      A request body size limit could not be applied. This server does not support the IHttpMaxRequestBodySizeFeature.
 warn: Microsoft.AspNetCore.Mvc.Filters.RequestSizeLimitFilter[1]
       A request body size limit could not be applied. This server does not support the IHttpRequestBodySizeFeature.
 warn: Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware[9]
@@ -243,35 +246,33 @@ warn: Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware[9]
       A request body size limit could not be applied. This server does not support the IHttpMaxRequestBodySizeFeature.
 warn: Microsoft.AspNetCore.Mvc.Filters.RequestSizeLimitFilter[1]
       A request body size limit could not be applied. This server does not support the IHttpRequestBodySizeFeature.
-warn: Fudis.Pagos.Api.Controllers.PagosController[0]
+warn: Fudis.Pagos.Api.Filters.ValidarFirmaPasarelaFilter[0]
       Aviso de pago rechazado. Firma: Ausente. IP: (null)
 warn: Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware[9]
       A request body size limit could not be applied. This server does not support the IHttpMaxRequestBodySizeFeature.
 warn: Microsoft.AspNetCore.Mvc.Filters.RequestSizeLimitFilter[1]
       A request body size limit could not be applied. This server does not support the IHttpRequestBodySizeFeature.
-warn: Fudis.Pagos.Api.Controllers.PagosController[0]
+warn: Fudis.Pagos.Api.Filters.ValidarFirmaPasarelaFilter[0]
       Aviso de pago rechazado. Firma: Invalida. IP: (null)
 warn: Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware[9]
       A request body size limit could not be applied. This server does not support the IHttpMaxRequestBodySizeFeature.
 warn: Microsoft.AspNetCore.Mvc.Filters.RequestSizeLimitFilter[1]
       A request body size limit could not be applied. This server does not support the IHttpRequestBodySizeFeature.
-warn: Fudis.Pagos.Api.Controllers.PagosController[0]
+warn: Fudis.Pagos.Api.Filters.ValidarFirmaPasarelaFilter[0]
       Aviso de pago rechazado. Firma: Vencida. IP: (null)
 warn: Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware[9]
       A request body size limit could not be applied. This server does not support the IHttpMaxRequestBodySizeFeature.
 warn: Microsoft.AspNetCore.Mvc.Filters.RequestSizeLimitFilter[1]
       A request body size limit could not be applied. This server does not support the IHttpRequestBodySizeFeature.
-warn: Fudis.Pagos.Api.Controllers.PagosController[0]
+warn: Fudis.Pagos.Api.Filters.ValidarFirmaPasarelaFilter[0]
       Aviso de pago rechazado. Firma: Invalida. IP: (null)
-  Passed Fudis.Pagos.IntegrationTests.PagosControllerTests.Health_responde_503_cuando_no_hay_base_de_datos [1 s]
-  Passed Fudis.Pagos.IntegrationTests.PagosControllerTests.Un_aviso_firmado_se_procesa_completo_incluido_el_aviso_al_restaurante [387 ms]
-  Passed Fudis.Pagos.IntegrationTests.PagosControllerTests.Quince_peticiones_http_iguales_al_mismo_tiempo_dejan_una_sola_ganancia [329 ms]
-  Passed Fudis.Pagos.IntegrationTests.PagosControllerTests.La_api_no_arranca_sin_secretos_de_firma [7 ms]
-  Passed Fudis.Pagos.IntegrationTests.PagosControllerTests.Sin_firma_o_con_firma_falsa_se_rechaza_sin_tocar_el_pedido [244 ms]
-[xUnit.net 00:00:14.51]   Finished:    Fudis.Pagos.IntegrationTests
-Results File: /home/claude/fudis-pagos/docs/test-results/IntegrationTests.trx
+  Passed Fudis.Pagos.IntegrationTests.PagosControllerTests.Quince_peticiones_http_iguales_al_mismo_tiempo_dejan_una_sola_ganancia [308 ms]
+  Passed Fudis.Pagos.IntegrationTests.PagosControllerTests.La_api_no_arranca_sin_secretos_de_firma [6 ms]
+  Passed Fudis.Pagos.IntegrationTests.PagosControllerTests.Sin_firma_o_con_firma_falsa_se_rechaza_sin_tocar_el_pedido [262 ms]
+[xUnit.net 00:00:15.66]   Finished:    Fudis.Pagos.IntegrationTests
+Results File: /home/claude/fudis_prueba_tecnica/docs/test-results/IntegrationTests.trx
 
 Test Run Successful.
 Total tests: 36
      Passed: 36
- Total time: 14.8922 Seconds
+ Total time: 16.0224 Seconds
