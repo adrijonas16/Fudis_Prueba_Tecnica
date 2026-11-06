@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Los scripts SQL viajan dentro del programa: el mismo script que se revisa es el que se ejecuta. -->
+    <EmbeddedResource Include="..\..\db\migrations\*.sql" LogicalName="migraciones/%(Filename)%(Extension)" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,74 @@
+### 1. Pago normal (pedido 1)
+>> {"eventId":"evt_A","eventType":"payment.succeeded","paymentId":"pay_1","orderId":1,"amount":45000.00,"currency":"COP","occurredAt":"2026-11-06T02:17:41Z"}
+{"resultado":"PROCESADO","requiereRevision":false,"detalle":"Pedido pagado; ganancia registrada; aviso al restaurante pendiente de envío."}
+<< HTTP 200
+
+### 2. Reintento idéntico (mismo eventId)
+>> {"eventId":"evt_A","eventType":"payment.succeeded","paymentId":"pay_1","orderId":1,"amount":45000.00,"currency":"COP","occurredAt":"2026-11-06T02:17:42Z"}
+{"resultado":"DUPLICADO","requiereRevision":false,"detalle":"Este aviso ya había llegado (resultado original: PROCESADO)."}
+<< HTTP 200
+
+### 3. Mismo pago, eventId nuevo
+>> {"eventId":"evt_B","eventType":"payment.succeeded","paymentId":"pay_1","orderId":1,"amount":45000.00,"currency":"COP","occurredAt":"2026-11-06T02:17:42Z"}
+{"resultado":"YA_PAGADO","requiereRevision":false,"detalle":"El pedido ya fue pagado con este mismo pago."}
+<< HTTP 200
+
+### 4. Otro pago para el mismo pedido (posible cobro doble)
+>> {"eventId":"evt_C","eventType":"payment.succeeded","paymentId":"pay_2","orderId":1,"amount":45000.00,"currency":"COP","occurredAt":"2026-11-06T02:17:42Z"}
+{"resultado":"PAGO_EN_CONFLICTO","requiereRevision":true,"detalle":"El pedido ya fue pagado con otro pago (pay_1). Posible cobro doble: revisar y reembolsar."}
+<< HTTP 200
+
+### 5. Monto incorrecto (pedido 2)
+>> {"eventId":"evt_D","eventType":"payment.succeeded","paymentId":"pay_3","orderId":2,"amount":100.00,"currency":"COP","occurredAt":"2026-11-06T02:17:42Z"}
+{"resultado":"MONTO_NO_COINCIDE","requiereRevision":true,"detalle":"Se esperaba 30000.00 COP y llegó 100.00 COP."}
+<< HTTP 200
+
+### 6. Pedido sin repartidor (pedido 2)
+>> {"eventId":"evt_E","eventType":"payment.succeeded","paymentId":"pay_3","orderId":2,"amount":30000.00,"currency":"COP","occurredAt":"2026-11-06T02:17:42Z"}
+{"resultado":"PROCESADO","requiereRevision":false,"detalle":"Pedido pagado sin repartidor asignado: la ganancia se registrará al asignarlo; aviso al restaurante pendiente de envío."}
+<< HTTP 200
+
+### 7. Pedido cancelado (pedido 3)
+>> {"eventId":"evt_F","eventType":"payment.succeeded","paymentId":"pay_4","orderId":3,"amount":52000.00,"currency":"COP","occurredAt":"2026-11-06T02:17:42Z"}
+{"resultado":"PEDIDO_NO_PAGABLE","requiereRevision":true,"detalle":"El pedido está en estado CANCELLED; no se puede marcar como pagado."}
+<< HTTP 200
+
+### 8. Firma con secreto incorrecto
+>> {"eventId":"evt_G","eventType":"payment.succeeded","paymentId":"pay_demo_1","orderId":1,"amount":45000.00,"currency":"COP","occurredAt":"2026-11-06T02:17:42Z"}
+{"type":"https://tools.ietf.org/html/rfc9110#section-15.5.2","title":"Unauthorized","status":401,"traceId":"00-5e36a28bb9e260b6fb2b345ac097fdb2-9b299f96440ec8be-00"}
+<< HTTP 401
+
+### 9. 10 envíos simultáneos del mismo aviso (pedido 4, nuevo)
+      9 "resultado":"DUPLICADO"
+      1 "resultado":"PROCESADO"
+
+### Estado final en la base de datos
+Id Status DriverId PaymentId
+-- ------ -------- ---------
+1 PAID 7 pay_1
+2 PAID NULL pay_3
+3 CANCELLED 9 NULL
+4 PAID 8 pay_5
+OrderId DriverId Amount SharePercent SourcePaymentId
+------- -------- ------ ------------ ---------------
+1 7 3500.00 70.00 pay_1
+4 8 4900.00 70.00 pay_5
+EventId PaymentId OrderId Outcome RequiresReview
+------- --------- ------- ------- --------------
+evt_A pay_1 1 PROCESADO 0
+evt_B pay_1 1 YA_PAGADO 0
+evt_C pay_2 1 PAGO_EN_CONFLICTO 1
+evt_D pay_3 2 MONTO_NO_COINCIDE 1
+evt_E pay_3 2 PROCESADO 0
+evt_F pay_4 3 PEDIDO_NO_PAGABLE 1
+evt_CARRERA pay_5 4 PROCESADO 0
+Type Attempts Estado
+---- -------- ------
+restaurante.pedido-pagado.v1 1 enviado
+restaurante.pedido-pagado.v1 1 enviado
+restaurante.pedido-pagado.v1 1 enviado
+
+### Log: avisos al restaurante
+      Restaurante notificado: pedido 1 pagado (pago pay_1, id del aviso dc3d4c69-7f4f-45ad-9d6e-6951e1f94c6a).
+      Restaurante notificado: pedido 2 pagado (pago pay_3, id del aviso 4213e06b-3609-44a5-a783-13087db76ea8).
+      Restaurante notificado: pedido 4 pagado (pago pay_5, id del aviso 13a6db60-b2b6-4c4c-91e6-7cc9bad3e476).
